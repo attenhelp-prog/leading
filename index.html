@@ -1,263 +1,171 @@
-<!DOCTYPE html>
 <html lang="ru">
+    
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Attention — новая валюта</title>
-  <link rel="stylesheet" href="leading.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attention</title>
 </head>
-<body>
-
-  <header>
-    <div class="container header-flex">
-      <div class="logo">attention</div>
-      <nav>
-        <a href="#about">О нас</a>
-        <a href="#features">Возможности</a>
-        <a href="#boost">Буст</a>
-        <a href="#cta" class="btn-outline">Войти</a>
-        <a href="#cta" class="btn-primary">Регистрация</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container hero-flex">
-      <div class="hero-text">
-        <h1>Внимание —<br /><span>новая валюта</span></h1>
-        <p>Публикуй посты на время. Управляй лентой. Отвечай другим. Никакого шума — только то, что важно.</p>
-        <div class="hero-buttons">
-          <a href="index.html" class="btn-primary">Начать</a>
-          <a href="#features" class="btn-outline">Узнать больше</a>
+<body> 
+    <link rel="stylesheet" href="style.css">
+    <h1 class="logo">attention</h1>
+    <div class="search">
+        <div class="search-row">
+        <input type="search" class="search2" placeholder="Поиск">
+        <button class="N">Найти</button>
         </div>
+        <div class="resu" id="ResuBTN">
+<button class="re" id="reBTN">Рекомендации</button>
+<button class="su" id="suBTN">Мои авторы</button>
+    </div>
+    </div>
+    <div>
+        <button class="new"  id="addPostBtn">+</button>
+    </div>
+    <div>
+        <a href="./profile/profile1.html">
+            <button class="p"> 
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+    </svg>
+            </button>
+        </a>
+    </div>
+    <div class="block"> 
+    </div>
+<div class="overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+  <h2>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+    Создать пост
+  </h2>
+  <button class="modal-close" id="closeModalBtn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </button>
+</div>
+
+    <div class="list">
+
+      <label for="file-upload" class="img-card" id="preview-label">
+        <span id="upload-text" class="te">+</span>
+      </label>
+      <input type="file" id="file-upload" class="hidden-input" accept="image/*">
+
+
+      <input type="text" class="des" placeholder="Что у вас происходит?">
+
+      <div class="schedule-section">
+  <p class="section-title">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+    Срок публикации
+  </p>
+  <div class="time-grid">
+    <label class="time-card"><input type="radio" name="post-time" value="1"><span>1ч</span></label>
+    <label class="time-card"><input type="radio" name="post-time" value="3"><span>3ч</span></label>
+    <label class="time-card"><input type="radio" name="post-time" value="10"><span>10ч</span></label>
+    <label class="time-card"><input type="radio" name="post-time" value="24" checked><span>1д</span></label>
+    <label class="time-card"><input type="radio" name="post-time" value="72"><span>3д</span></label>
+    <label class="time-card"><input type="radio" name="post-time" value="240"><span>10д</span></label>
+  </div>
+</div>
+
+      <div class="boost">
+  <p class="section-title">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+    Пакет продвижения (Буст)
+  </p>
+  <div class="boost-grid">
+    <label class="boost-card"><input type="radio" name="boost-plan" value="0" checked><div class="boost-info"><span class="boost-time">Без буста</span><span class="boost-price">0₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="1"><div class="boost-info"><span class="boost-time">1 час</span><span class="boost-price">99₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="3"><div class="boost-info"><span class="boost-time">3 часа</span><span class="boost-price">297₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="10"><div class="boost-info"><span class="boost-time">10 часов <small>-10%</small></span><span class="boost-price">891₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="24"><div class="boost-info"><span class="boost-time">1 день <small>-15%</small></span><span class="boost-price">2 020₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="72"><div class="boost-info"><span class="boost-time">3 дня <small>-20%</small></span><span class="boost-price">5 702₽</span></div></label>
+    <label class="boost-card"><input type="radio" name="boost-plan" value="240"><div class="boost-info"><span class="boost-time">10 дней <small>-30%</small></span><span class="boost-price">16 632₽</span></div></label>
+  </div>
+</div>
+
+    
+      <div class="publish">
+        <button class="go" onclick="createPost()">Опубликовать</button>
       </div>
-      <div class="hero-visual">
-        <div class="phone-mockup">
-          <div class="mockup-post">
-            <div class="mockup-header">
-              <span class="mockup-name">user</span>
-              <span class="mockup-time">24ч</span>
-            </div>
-            <div class="mockup-text">«Привет, Attention!»</div>
-            <div class="mockup-stats">
-              <span class="stat-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15" /></svg>
-                879
-              </span>
-              <span class="stat-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                16k
-              </span>
-            </div>
-          </div>
+    </div>
+  </div>
+</div>
+
+<div id="feed"></div>
+
+
+    <div id="form">
+        <div class="post-card">
+    <div class="info">
+        <a href="" class="nik">name</a>
+        <time datetime="PT1H" class="time">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <polyline points="12 6 12 12 16 14" />
+</svg>
+            1h</time>
+
+        <div class="butt"> 
+            <button class="like">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="18 15 12 9 6 15" />
+</svg>
+            </button>
+            <span class="like-count">0</span>
+            <button class="diz">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="6 9 12 15 18 9" />
+</svg>
+            </button>
         </div>
-      </div>
-    </div>
-  </section>
+<span class="views">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+        <circle cx="12" cy="12" r="3" />
+    </svg>
+    <span class="views-count">0</span>
+</span>
 
-  <section id="about" class="about">
-    <div class="container">
-      <h2>Что такое Attention?</h2>
-      <p>Это социальная платформа, где каждый пост живёт ограниченное время. Ты решаешь, сколько он будет висеть в ленте — час, день или неделя. Нет вечного спама — только актуальное.</p>
     </div>
-  </section>
-
-  <section id="features" class="features">
-    <div class="container">
-      <h2>Возможности</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div>
-          <h3>Время жизни</h3>
-          <p>Пост исчезает через выбранное время — 1ч, 3ч, 10ч, 1д, 3д, 10д.</p>
+    <div class="post-image">
+        <img src="" alt="">
+    </div>
+    <div class="description">
+        <p class="post-description">*Описание происходящего на фото*</p>
+    </div>
+</div>
+    </div>
+<div id="confirmOverlay" class="confirm-overlay">
+    <div class="confirm-box">
+        <div class="confirm-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15" /></svg></div>
-          <h3>Подписки</h3>
-          <p>Подписывайся на авторов и читай только их в «Моих авторах».</p>
+        <div class="confirm-title">Вы уверены?</div>
+        <div class="confirm-message" id="confirmMessage">Скрыть автора на 45 дней?</div>
+        <div class="confirm-actions">
+            <button class="confirm-btn confirm-cancel" id="confirmCancel">Отмена</button>
+            <button class="confirm-btn confirm-ok" id="confirmOk">Да, скрыть</button>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9" /></svg></div>
-          <h3>Скрытие</h3>
-          <p>Дизлайк — автор скрывается на 45 дней. Ты управляешь лентой.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></div>
-          <h3>Ответы</h3>
-          <p>Отвечай на посты других авторов прямо в ленте.</p>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <section id="boost" class="boost">
-    <div class="container">
-      <h2>🚀 Продвижение постов</h2>
-      <p class="boost-subtitle">Хочешь, чтобы твой пост увидело больше людей?<br>Используй буст — и твой пост поднимется в ленте.</p>
-
-      <div class="boost-plans">
-        <div class="boost-plan"><div class="boost-plan-header">Без буста</div><div class="boost-plan-price">0₽</div><div class="boost-plan-desc">Стандартная видимость</div></div>
-        <div class="boost-plan"><div class="boost-plan-header">1 час</div><div class="boost-plan-price">99₽</div><div class="boost-plan-desc">—</div></div>
-        <div class="boost-plan"><div class="boost-plan-header">3 часа</div><div class="boost-plan-price">297₽</div><div class="boost-plan-desc">—</div></div>
-        <div class="boost-plan popular"><div class="boost-plan-header">10 часов</div><div class="boost-plan-price">891₽</div><div class="boost-plan-desc">-10%</div></div>
-        <div class="boost-plan"><div class="boost-plan-header">1 день</div><div class="boost-plan-price">2 020₽</div><div class="boost-plan-desc">-15%</div></div>
-        <div class="boost-plan"><div class="boost-plan-header">3 дня</div><div class="boost-plan-price">5 702₽</div><div class="boost-plan-desc">-20%</div></div>
-        <div class="boost-plan"><div class="boost-plan-header">10 дней</div><div class="boost-plan-price">16 632₽</div><div class="boost-plan-desc">-30%</div></div>
-      </div>
-
-      <p class="boost-note">⚡ Буст поднимает пост в ленте, делая его видимым для большего числа пользователей.</p>
-    </div>
-  </section>
-
-  <section id="cta" class="cta">
-    <div class="container">
-      <h2>Готов начать?</h2>
-      <p>Присоединяйся к Attention и стань частью сообщества.</p>
-      <a href="index.html" class="btn-primary">Регистрация</a>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Attention. Все права защищены.</p>
-      <p><a href="#">Политика</a> · <a href="#">Контакты</a></p>
-    </div>
-  </footer>
-
+</div>
+<script src="script.js"></script>
 </body>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-
-   
-  const heroSpan = document.querySelector('.hero-text h1 span');
-  if (heroSpan) {
-    const originalText = heroSpan.textContent;
-    heroSpan.textContent = '';
-    
-    let charIndex = 0;
-    
-    function typeText() {
-      if (charIndex < originalText.length) {
-        const char = originalText.charAt(charIndex);
-        const span = document.createElement('span');
-        
-        
-        if (char === ' ') {
-          span.textContent = ' ';
-          span.style.display = 'inline';
-          span.style.opacity = '1';
-          heroSpan.appendChild(span);
-          charIndex++;
-          setTimeout(typeText, 40);
-          return;
-        }
-        
-        span.textContent = char;
-        span.style.display = 'inline-block';
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(12px) scale(0.8)';
-        span.style.transition = 'all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        heroSpan.appendChild(span);
-        
-        requestAnimationFrame(() => {
-          span.style.opacity = '1';
-          span.style.transform = 'translateY(0) scale(1)';
-        });
-        
-        charIndex++;
-        setTimeout(typeText, 50 + Math.random() * 40);
-      } else {
-        heroSpan.style.transition = 'text-shadow 0.8s ease';
-        heroSpan.style.textShadow = '0 0 60px rgba(139, 124, 247, 0.3), 0 0 120px rgba(139, 124, 247, 0.08)';
-      }
-    }
-    
-    setTimeout(typeText, 400);
-  }
-
-
-  const blocks = document.querySelectorAll('.feature-card, .about, .cta, .boost');
-
-  function checkVisibility() {
-    blocks.forEach(block => {
-      const rect = block.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 60) {
-        block.classList.add('show');
-      }
-    });
-  }
-
-  checkVisibility();
-  window.addEventListener('scroll', checkVisibility);
-
- 
-  document.querySelectorAll('nav a, .hero-buttons a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId.startsWith('#')) {
-        e.preventDefault();
-        const target = document.querySelector(targetId);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
-  });
-
- 
-  const particlesContainer = document.createElement('div');
-  particlesContainer.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  `;
-  document.body.prepend(particlesContainer);
-
-  const colors = ['rgba(139, 124, 247, 0.08)', 'rgba(167, 139, 250, 0.06)', 'rgba(139, 124, 247, 0.04)'];
-  
-  for (let i = 0; i < 30; i++) {
-    const circle = document.createElement('div');
-    const size = 4 + Math.random() * 12;
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const duration = 15 + Math.random() * 30;
-    const delay = Math.random() * 20;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    
-    circle.style.cssText = `
-      position: absolute;
-      left: ${x}%;
-      top: ${y}%;
-      width: ${size}px;
-      height: ${size}px;
-      background: ${color};
-      border-radius: 50%;
-      animation: floatCircle_${i} ${duration}s ease-in-out ${delay}s infinite alternate;
-      will-change: transform, opacity;
-    `;
-    
-    particlesContainer.appendChild(circle);
-    
-    const moveX = (Math.random() - 0.5) * 150;
-    const moveY = (Math.random() - 0.5) * 150;
-    const scale = 1 + Math.random() * 1.5;
-    
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-      @keyframes floatCircle_${i} {
-        0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-        100% { transform: translate(${moveX}px, ${moveY}px) scale(${scale}); opacity: 0.7; }
-      }
-    `;
-    document.head.appendChild(styleSheet);
-  }
-
-});
-</script>
-
 </html>
+
