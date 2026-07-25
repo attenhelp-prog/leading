@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         setTimeout(() => {
             // alert('✅ Добро пожаловать, ' + usernameValue + '!');
-            window.location.href = 'index.html';
+            window.location.href = 'feed.html';
         }, 1000);
     });
 
