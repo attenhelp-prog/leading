@@ -26,16 +26,19 @@ document.addEventListener('DOMContentLoaded', function() {
     registerBtn.addEventListener('click', function() {
         if (this.disabled) return;
 
-        const usernameValue = username.value.trim(); 
+        const usernameValue = username.value.trim();
+        const emailValue = email.value.trim();
+        const passwordValue = password.value;   
 
-        // Сохраняем пользователя
+       
         localStorage.setItem('currentUser', usernameValue);
+        localStorage.setItem('userEmail', emailValue);
+        localStorage.setItem('userPassword', passwordValue);   
 
         this.textContent = '⏳ Регистрация...';
         this.disabled = true;
 
         setTimeout(() => {
-            // alert('✅ Добро пожаловать, ' + usernameValue + '!');
             window.location.href = 'feed.html';
         }, 1000);
     });
