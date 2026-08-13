@@ -986,8 +986,7 @@ body {
         background: transparent;
     }
 }
-
-.post-card.highlight {
+ .post-card.highlight {
     animation: highlightPremium 3s ease forwards;
     border-radius: 20px;
     position: relative;
@@ -1033,4 +1032,4 @@ body {
     border-radius: 20px;
     position: relative;
     z-index: 1;
-}
+}  

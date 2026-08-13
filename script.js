@@ -408,5 +408,206 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 });
+// ===== ПОИСК (БЕЗ КОПИЙ) =====
+const searchInput = document.querySelector('.search2');
+const searchBtn = document.querySelector('.N');
+let searchQuery = '';
+
+function searchPosts() {
+    searchQuery = searchInput.value.trim().toLowerCase();
+    renderFeedWithAnimation(); // перерисовываем с анимацией
+}
+
+// ===== ОТРИСОВКА С АНИМАЦИЕЙ =====
+function renderFeedWithAnimation() {
+    removeExpiredPosts();
+    
+    const feed = document.getElementById('feed');
+    const template = document.getElementById('form');
+    const isMyAuthors = document.getElementById('suBTN')?.classList.contains('active');
+    
+    if (!feed || !template) return;
+    feed.innerHTML = '';
+    
+    // Фильтруем посты (без копий)
+    let visible = posts;
+    
+    // Поиск
+    if (searchQuery) {
+        visible = visible.filter(post => {
+            const textMatch = post.text.toLowerCase().includes(searchQuery);
+            const authorMatch = post.author.toLowerCase().includes(searchQuery);
+            return textMatch || authorMatch;
+        });
+    }
+    
+    // Мои авторы
+    if (isMyAuthors) {
+        visible = visible.filter(p => subscribedAuthors.includes(p.author));
+    }
+    
+    // Скрытые авторы
+    const now = Date.now();
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(`hidden_${currentUser}_`)) {
+            const hideUntil = parseInt(localStorage.getItem(key));
+            if (hideUntil > now) {
+                const author = key.replace(`hidden_${currentUser}_`, '');
+                visible = visible.filter(p => p.author !== author);
+            } else {
+                localStorage.removeItem(key);
+            }
+        }
+    }
+    
+    // Отрисовка с анимацией
+    visible.forEach((post, index) => {
+        const card = template.querySelector('.post-card');
+        if (!card) return;
+        
+        const postCard = card.cloneNode(true);
+        postCard.setAttribute('data-post-id', post.id);
+        
+        const nikEl = postCard.querySelector('.nik');
+        if (nikEl) nikEl.textContent = post.author;
+        
+        const timeEl = postCard.querySelector('.time');
+        if (timeEl) timeEl.innerHTML = getRemainingTime(post);
+        
+        const likeCountEl = postCard.querySelector('.like-count');
+        if (likeCountEl) likeCountEl.textContent = post.likes || 0;
+        
+        const dizCountEl = postCard.querySelector('.diz-count');
+        if (dizCountEl) dizCountEl.textContent = post.dislikes || 0;
+        
+        const viewsCountEl = postCard.querySelector('.views-count');
+        if (viewsCountEl) viewsCountEl.textContent = post.views || 0;
+        
+        const descEl = postCard.querySelector('.post-description');
+        if (descEl) descEl.textContent = post.text;
+        
+        const postImageDiv = postCard.querySelector('.post-image');
+        if (post.image && postImageDiv) {
+            postImageDiv.innerHTML = `<img src="${post.image}" style="max-width:100%; border-radius:12px;">`;
+            postImageDiv.style.display = '';
+        } else if (postImageDiv) {
+            postImageDiv.style.display = 'none';
+            postImageDiv.innerHTML = '';
+        }
+        
+        if (post.boost && post.boost > 0) {
+            postCard.classList.add('boosted');
+        }
+        
+        // ===== ЛАЙК =====
+        const likeBtn = postCard.querySelector('.like');
+        if (likeBtn) {
+            const newLikeBtn = likeBtn.cloneNode(true);
+            likeBtn.parentNode.replaceChild(newLikeBtn, likeBtn);
+            newLikeBtn.onclick = () => {
+                const originalPost = posts.find(p => p.id === post.id);
+                if (!originalPost) return;
+                if (originalPost.hasLiked) return;
+                originalPost.hasLiked = true;
+                originalPost.likes = (originalPost.likes || 0) + 1;
+                if (originalPost.hasDisliked) {
+                    originalPost.hasDisliked = false;
+                    originalPost.dislikes = (originalPost.dislikes || 0) - 1;
+                }
+                if (originalPost.author !== currentUser && !subscribedAuthors.includes(originalPost.author)) {
+                    subscribedAuthors.push(originalPost.author);
+                }
+                saveData();
+                renderFeedWithAnimation();
+            };
+        }
+        
+        // ===== ДИЗЛАЙК + ПОДТВЕРЖДЕНИЕ =====
+const dizBtn = postCard.querySelector('.diz');
+if (dizBtn) {
+    const newDizBtn = dizBtn.cloneNode(true);
+    dizBtn.parentNode.replaceChild(newDizBtn, dizBtn);
+    
+    newDizBtn.onclick = () => {
+        const originalPost = posts.find(p => p.id === post.id);
+        if (!originalPost) return;
+        if (originalPost.hasDisliked) return;
+
+        showConfirm(
+            `Скрыть автора "${originalPost.author}" на 45 дней?`,
+            function(confirmed) {
+                if (confirmed) {
+                    originalPost.hasDisliked = true;
+                    originalPost.dislikes = (originalPost.dislikes || 0) + 1;
+
+                    if (originalPost.hasLiked) {
+                        originalPost.hasLiked = false;
+                        originalPost.likes = (originalPost.likes || 0) - 1;
+                    }
+
+                    const hideUntil = Date.now() + (45 * 24 * 60 * 60 * 1000);
+                    localStorage.setItem(`hidden_${currentUser}_${originalPost.author}`, hideUntil);
+
+                    saveData();
+                    renderFeedWithAnimation();
+                }
+            }
+        );
+    };
+}
+        
+        // ===== КНОПКА ОТВЕТИТЬ =====
+        const replyBtn = document.createElement('button');
+        replyBtn.className = 'reply-btn';
+        replyBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            Ответить
+        `;
+        replyBtn.onclick = () => {
+            currentReplyTo = post.id;
+            document.querySelector('.overlay').classList.add('active');
+        };
+        postCard.appendChild(replyBtn);
+        
+        // ===== АНИМАЦИЯ ПОЯВЛЕНИЯ =====
+        postCard.style.opacity = '0';
+        postCard.style.transform = 'translateY(20px) scale(0.96)';
+        postCard.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        postCard.style.transitionDelay = (index * 0.04) + 's';
+        
+        feed.appendChild(postCard);
+        
+        requestAnimationFrame(() => {
+            postCard.style.opacity = '1';
+            postCard.style.transform = 'translateY(0) scale(1)';
+        });
+        
+        // Просмотры
+        if (!post.viewCounted) {
+            const originalPost = posts.find(p => p.id === post.id);
+            if (originalPost) {
+                originalPost.viewCounted = true;
+                originalPost.views = (originalPost.views || 0) + 1;
+                saveData();
+            }
+        }
+    });
+}
+
+// ===== ПОДКЛЮЧАЕМ ПОИСК =====
+if (searchBtn) {
+    searchBtn.onclick = searchPosts;
+}
+
+if (searchInput) {
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            searchPosts();
+        }
+    });
+}
 
 window.createPost = createPost;
