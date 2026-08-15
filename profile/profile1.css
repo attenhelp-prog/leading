@@ -276,3 +276,137 @@ body {
 .profile-post-card:nth-child(3) { animation-delay: 0.8s; }
 .profile-post-card:nth-child(4) { animation-delay: 1.2s; }
 .profile-post-card:nth-child(5) { animation-delay: 1.6s; }
+
+
+
+.delete-post-btn {
+    background: none !important;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-post-btn svg {
+    stroke: #5a5a72;
+    transition: all 0.25s ease;
+    width: 16px;
+    height: 16px;
+}
+
+.delete-post-btn:hover svg {
+    stroke: #ef4444;
+    transform: scale(1.1);
+}
+
+
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.confirm-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirm-box {
+    background: #12121a;
+    border: 1px solid #1a1a24;
+    border-radius: 20px;
+    padding: 24px 20px 20px;
+    max-width: 320px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.confirm-overlay.active .confirm-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.confirm-icon svg {
+    stroke: #ef4444;
+    width: 40px;
+    height: 40px;
+}
+
+.confirm-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 4px;
+}
+
+.confirm-message {
+    font-size: 14px;
+    color: #8a8aa0;
+    margin: 8px 0 16px;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.confirm-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.confirm-cancel {
+    background: #1a1a24;
+    color: #8a8aa0;
+}
+
+.confirm-cancel:hover {
+    background: #242436;
+    color: #ffffff;
+}
+
+.confirm-ok {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ffffff;
+}
+
+.confirm-ok:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+}
+
+.confirm-overlay .confirm-box {
+    animation: confirmPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes confirmPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

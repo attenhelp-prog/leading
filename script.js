@@ -322,7 +322,7 @@ const newPost = {
     posts.unshift(newPost);
     currentReplyTo = null;
     saveData();
-    renderFeed();
+    renderFeedWithAnimation();
   }
   
   if (descInput) descInput.value = '';
@@ -461,6 +461,13 @@ function renderFeedWithAnimation() {
         }
     }
     
+    // ===== СОРТИРОВКА ПО БУСТУ =====
+visible.sort((a, b) => {
+    const boostA = a.boost || 0;
+    const boostB = b.boost || 0;
+    return boostB - boostA; // чем больше буст, тем выше
+});
+
     // Отрисовка с анимацией
     visible.forEach((post, index) => {
         const card = template.querySelector('.post-card');
