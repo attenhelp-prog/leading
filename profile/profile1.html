@@ -13,7 +13,23 @@
     </div>
     
     <h2 class="profile-name"><span id="profile-username">Пользователь</span></h2>
-    <p class="text" id="empty-text">Постов нет.</p>
+   
+<div class="profile-header">
+    <div class="profile-stats">
+        <span class="stat-item">
+            <span class="stat-label">постов</span>
+            <span class="stat-number" id="statPosts">0</span>
+        </span>
+        <span class="stat-item">
+            <span class="stat-label">лайков</span>
+            <span class="stat-number" id="statLikes">0</span>
+        </span>
+        <span class="stat-item">
+            <span class="stat-label">просм.</span>
+            <span class="stat-number" id="statViews">0</span>
+        </span>
+    </div>
+</div>
     
     <div id="profile-feed"></div>
     <div class="particles">
@@ -28,8 +44,6 @@
     <div class="particle"></div>
     <div class="particle"></div>
 </div>
-
-
 
 <div id="confirmOverlayProfile" class="confirm-overlay">
     <div class="confirm-box">
@@ -48,186 +62,6 @@
         </div>
     </div>
 </div>
-
-
-
-    <script>
-// ===== ДАННЫЕ =====
-let posts = [];
-let currentUser = "user";
-
-// ===== ЗАГРУЗКА =====
-function loadData() {
-    const saved = localStorage.getItem('posts');
-    if (saved) posts = JSON.parse(saved);
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = savedUser;
-}
-
-// ===== ОБРАТНЫЙ ОТСЧЁТ =====
-function getRemainingTime(post) {
-    const now = Date.now();
-    const expiresAt = post.createdAt + (post.lifeTime * 60 * 60 * 1000);
-    const remaining = expiresAt - now;
-    if (remaining <= 0) return "0ч";
-    const hours = Math.floor(remaining / (60 * 60 * 1000));
-    const days = Math.floor(hours / 24);
-    if (days > 0) return days + "д " + (hours % 24) + "ч";
-    return hours + "ч";
-}
-
-// ===== ПОДТВЕРЖДЕНИЕ =====
-const confirmOverlay = document.getElementById('confirmOverlayProfile');
-const confirmMessage = document.getElementById('confirmMessageProfile');
-const confirmOk = document.getElementById('confirmOkProfile');
-const confirmCancel = document.getElementById('confirmCancelProfile');
-
-let confirmCallback = null;
-
-function showConfirm(message, callback) {
-    confirmMessage.textContent = message;
-    confirmOverlay.classList.add('active');
-    confirmCallback = callback;
-}
-
-confirmOk.onclick = function() {
-    confirmOverlay.classList.remove('active');
-    if (confirmCallback) confirmCallback(true);
-};
-
-confirmCancel.onclick = function() {
-    confirmOverlay.classList.remove('active');
-    if (confirmCallback) confirmCallback(false);
-};
-
-confirmOverlay.onclick = function(e) {
-    if (e.target === confirmOverlay) {
-        confirmOverlay.classList.remove('active');
-        if (confirmCallback) confirmCallback(false);
-    }
-};
-
-// ===== СОХРАНЕНИЕ =====
-function saveData() {
-    localStorage.setItem('posts', JSON.stringify(posts));
-    localStorage.setItem('currentUser', currentUser);
-}
-
-// ===== ОТРИСОВКА ПОСТОВ В ПРОФИЛЕ =====
-function renderProfilePosts() {
-    const container = document.getElementById('profile-feed');
-    const emptyText = document.getElementById('empty-text');
-
-    if (!container) return;
-
-    loadData();
-
-    const userPosts = posts.filter(function(post) {
-        return post.author === currentUser;
-    });
-
-    if (userPosts.length === 0) {
-        if (emptyText) emptyText.style.display = 'block';
-        container.innerHTML = '';
-        return;
-    }
-
-    if (emptyText) emptyText.style.display = 'none';
-
-    const nameSpan = document.getElementById('profile-username');
-    if (nameSpan) nameSpan.textContent = currentUser;
-
-    container.innerHTML = '';
-
-    userPosts.forEach(function(post) {
-        const postDiv = document.createElement('div');
-        postDiv.className = 'profile-post-card';
-
-        const remaining = getRemainingTime(post);
-
-        let imageHtml = '';
-        if (post.image) {
-            imageHtml = '<img src="' + post.image + '" class="profile-post-image">';
-        }
-
-        postDiv.innerHTML = `
-            <div class="profile-post-header">
-                <span class="profile-post-author">${post.author}</span>
-                <span class="profile-post-time">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    ${remaining}
-                </span>
-                <button class="delete-post-btn" data-post-id="${post.id}">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6" />
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                    </svg>
-                </button>
-            </div>
-            <div class="profile-post-text">${post.text}</div>
-            ${imageHtml}
-            <div class="profile-post-stats">
-                <span class="stat-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="18 15 12 9 6 15" />
-                    </svg>
-                    ${post.likes || 0}
-                </span>
-                <span class="stat-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                    ${post.dislikes || 0}
-                </span>
-                <span class="stat-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    ${post.views || 0}
-                </span>
-                <span class="stat-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    ${post.lifeTime || 24}ч
-                </span>
-            </div>
-        `;
-
-        container.appendChild(postDiv);
-    });
-}
-
-// ===== КНОПКА УДАЛЕНИЯ (ДЕЛЕГИРОВАНИЕ) =====
-document.addEventListener('click', function(e) {
-    const deleteBtn = e.target.closest('.delete-post-btn');
-    if (!deleteBtn) return;
-
-    const postId = parseInt(deleteBtn.dataset.postId);
-    if (!postId) return;
-
-    showConfirm('Удалить этот пост?', function(confirmed) {
-        if (confirmed) {
-            const index = posts.findIndex(p => p.id === postId);
-            if (index !== -1) {
-                posts.splice(index, 1);
-                saveData();
-                renderProfilePosts();
-            }
-        }
-    });
-});
-
-// ========== ЗАПУСК ==========
-document.addEventListener('DOMContentLoaded', function() {
-    renderProfilePosts();
-});
-</script>
-
+<script src="profile1.js"></script>
 </body>
 </html>

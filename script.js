@@ -1,4 +1,3 @@
-
 // ===== ДАННЫЕ =====
 let posts = [];
 let currentUser = "user";
@@ -130,41 +129,6 @@ function renderFeed() {
         postCard.classList.add('boosted');
     }
 
-    // ===== ОТВЕТ (КОНТЕКСТ) =====
-if (post.replyTo) {
-    const parentPost = posts.find(p => p.id === post.replyTo);
-    if (parentPost) {
-        const contextDiv = document.createElement('div');
-        contextDiv.className = 'reply-context';
-        contextDiv.innerHTML = `
-            <div class="reply-header">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                Ответ на пост от ${parentPost.author}
-            </div>
-            <div class="reply-text">${parentPost.text}</div>
-        `;
-        
-        contextDiv.style.cursor = 'pointer';
-        contextDiv.onclick = function(e) {
-    e.stopPropagation();
-    const targetPost = document.querySelector(`.post-card[data-post-id="${parentPost.id}"]`);
-    if (targetPost) {
-        targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(function() {
-            targetPost.classList.add('highlight');
-            setTimeout(function() {
-                targetPost.classList.remove('highlight');
-            }, 2500);
-        }, 350);
-    }
-};
-        const infoEl = postCard.querySelector('.info');
-        if (infoEl) postCard.insertBefore(contextDiv, infoEl);
-    }
-}
-
     // ===== ЛАЙК =====
     const likeBtn = postCard.querySelector('.like');
     if (likeBtn) {
@@ -186,7 +150,7 @@ if (post.replyTo) {
         }
         
         saveData();
-        renderFeed();
+        renderFeedWithAnimation();
       };
     }
         // ===== ДИЗЛАЙК + ПОДТВЕРЖДЕНИЕ =====
@@ -214,7 +178,7 @@ if (post.replyTo) {
                         localStorage.setItem(`hidden_${currentUser}_${post.author}`, hideUntil);
 
                         saveData();
-                        renderFeed();
+                        renderFeedWithAnimation();
                     }
                 }
             );
@@ -315,7 +279,7 @@ const newPost = {
       posts.unshift(newPost);
       currentReplyTo = null;
       saveData();
-      renderFeed();
+      renderFeedWithAnimation()
     };
     reader.readAsDataURL(file.files[0]);
   } else {
@@ -342,7 +306,7 @@ const newPost = {
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', () => {
   loadData();
-  renderFeed();
+  renderFeedWithAnimation()
   
   const addBtn = document.getElementById('addPostBtn');
   if (addBtn) {
@@ -396,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
     suBtn.onclick = () => {
       suBtn.classList.add('active');
       reBtn?.classList.remove('active');
-      renderFeed();
+      renderFeedWithAnimation()
     };
   }
   
@@ -404,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
     reBtn.onclick = () => {
       reBtn.classList.add('active');
       suBtn?.classList.remove('active');
-      renderFeed();
+      renderFeedWithAnimation()
     };
   }
 });
@@ -460,13 +424,14 @@ function renderFeedWithAnimation() {
             }
         }
     }
-    
+
     // ===== СОРТИРОВКА ПО БУСТУ =====
 visible.sort((a, b) => {
     const boostA = a.boost || 0;
     const boostB = b.boost || 0;
     return boostB - boostA; // чем больше буст, тем выше
 });
+
 
     // Отрисовка с анимацией
     visible.forEach((post, index) => {
@@ -506,6 +471,41 @@ visible.sort((a, b) => {
         if (post.boost && post.boost > 0) {
             postCard.classList.add('boosted');
         }
+
+        // ===== ОТВЕТ (КОНТЕКСТ) =====
+if (post.replyTo) {
+    const parentPost = posts.find(p => p.id === post.replyTo);
+    if (parentPost) {
+        const contextDiv = document.createElement('div');
+        contextDiv.className = 'reply-context';
+        contextDiv.innerHTML = `
+            <div class="reply-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                Ответ на пост от ${parentPost.author}
+            </div>
+            <div class="reply-text">${parentPost.text}</div>
+        `;
+        
+        contextDiv.style.cursor = 'pointer';
+        contextDiv.onclick = function(e) {
+    e.stopPropagation();
+    const targetPost = document.querySelector(`.post-card[data-post-id="${parentPost.id}"]`);
+    if (targetPost) {
+        targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() {
+            targetPost.classList.add('highlight');
+            setTimeout(function() {
+                targetPost.classList.remove('highlight');
+            }, 2500);
+        }, 350);
+    }
+};
+        const infoEl = postCard.querySelector('.info');
+        if (infoEl) postCard.insertBefore(contextDiv, infoEl);
+    }
+}
         
         // ===== ЛАЙК =====
         const likeBtn = postCard.querySelector('.like');
