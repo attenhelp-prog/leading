@@ -530,7 +530,7 @@ if (post.replyTo) {
             };
         }
         
-        // ===== ДИЗЛАЙК + ПОДТВЕРЖДЕНИЕ =====
+        // ===== ДИЗЛАЙК  =====
 const dizBtn = postCard.querySelector('.diz');
 if (dizBtn) {
     const newDizBtn = dizBtn.cloneNode(true);
@@ -615,6 +615,51 @@ if (searchInput) {
             searchPosts();
         }
     });
+}
+
+
+// ===== ПОДТВЕРЖДЕНИЕ ДИЗЛАЙКА =====
+function showConfirm(message, callback) {
+    const overlay = document.getElementById('confirmOverlay');
+    const messageEl = document.getElementById('confirmMessage');
+    const okBtn = document.getElementById('confirmOk');
+    const cancelBtn = document.getElementById('confirmCancel');
+
+    if (!overlay || !messageEl || !okBtn || !cancelBtn) {
+        // Если элементов нет — используем стандартный confirm
+        if (confirm(message)) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+        return;
+    }
+
+    messageEl.textContent = message;
+    overlay.classList.add('active');
+
+    // Убираем старые обработчики, чтобы не накапливались
+    const newOk = okBtn.cloneNode(true);
+    const newCancel = cancelBtn.cloneNode(true);
+    okBtn.parentNode.replaceChild(newOk, okBtn);
+    cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+
+    newOk.onclick = function() {
+        overlay.classList.remove('active');
+        callback(true);
+    };
+
+    newCancel.onclick = function() {
+        overlay.classList.remove('active');
+        callback(false);
+    };
+
+    overlay.onclick = function(e) {
+        if (e.target === overlay) {
+            overlay.classList.remove('active');
+            callback(false);
+        }
+    };
 }
 
 window.createPost = createPost;
