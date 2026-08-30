@@ -1,150 +1,147 @@
 body {
-    margin: 0;
-    padding: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0b0b0e;
-    color: #e8e8ed;
+  margin: 0;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #0a0a0a;
+  color: #e0e0e0;
 }
 
 .back {
-    background: none;
-    border: 1px solid #1e1e28;
-    font-size: 14px;
-    color: #d4d4e0;
-    cursor: pointer;
-    padding: 10px 16px;
-    background: #16161e;
-    border-radius: 12px;
-    transition: transform 0.2s, border-color 0.2s;
+  background: none;
+  border: 1px solid #222;
+  font-size: 14px;
+  color: #e0e0e0;
+  cursor: pointer;
+  padding: 10px 16px;
+  background: #0d0d0d;
+  border-radius: 12px;
+  transition: transform 0.2s, border-color 0.2s;
 }
 
 .back:hover {
-    transform: scale(1.05);
-    border-color: #8b7cf7;
-    color: #8b7cf7;
+  transform: scale(1.05);
+  border-color: #ffffff;
+  color: #ffffff;
 }
 
 .profile-name {
-    text-align: center;
-    font-size: 22px;
-    margin: 20px 0;
-    font-weight: 600;
-    color: #ffffff;
+  text-align: center;
+  font-size: 22px;
+  margin: 20px 0;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .text {
-    text-align: center;
-    color: #5a5a72;
-    font-size: 16px;
-    margin: 40px 0;
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin: 40px 0;
 }
 
 #profile-feed {
-    max-width: 350px;
-    margin: 0 auto;
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 .profile-post-card {
-    max-width: 350px;
-    width: 90%;
-    margin: 20px auto;
-    background: #16161e;
-    border-radius: 16px;
-    padding: 16px;
-    border: 1px solid #1e1e28;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  width: 90%;
+  margin: 20px auto;
+  background: #0d0d0d;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .profile-post-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    border-color: #2a2a40;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-color: #333;
 }
 
 .profile-post-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .profile-post-author {
-    font-weight: 600;
-    font-size: 14px;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
 }
 
 .profile-post-time {
-    font-size: 13px;
-    color: #5a5a72;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .profile-post-text {
-    font-size: 15px;
-    line-height: 1.4;
-    margin: 4px 0 10px 0;
-    color: #d4d4e0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 4px 0 10px 0;
+  color: #cccccc;
 }
 
+/* ===== ФОТО В ПРОФИЛЕ (РАБОТАЕТ) ===== */
 .profile-post-image {
-    max-width: 100%;
-    border-radius: 12px;
-    margin: 7px 0;
-    display: block;
-    background: #0e0e16;
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 7px 0;
+  display: block;
+  background: #0a0a0a;
 }
 
 .profile-post-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 13px;
-    color: #5a5a72;
-    margin-top: 8px;
-    padding-top: 10px;
-    border-top: 1px solid #1e1e28;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: #555;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #1a1a1a;
 }
 
 .stat-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .stat-item svg {
-    stroke: #5a5a72;
-    flex-shrink: 0;
+  stroke: #555;
+  flex-shrink: 0;
 }
 
 .profile-post-card:hover .stat-item {
-    color: #8a8aa0;
+  color: #888;
 }
 
 .profile-post-card:hover .stat-item svg {
-    stroke: #8a8aa0;
+  stroke: #888;
 }
 
 .particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(139, 124, 247, 0.15);
-    animation: particleFloat var(--duration) ease-in-out var(--delay) infinite alternate;
-    will-change: transform, opacity;
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  animation: particleFloat var(--duration) ease-in-out var(--delay) infinite alternate;
+  will-change: transform, opacity;
 }
-
 
 .particle:nth-child(1) { width: 12px; height: 12px; top: 10%; left: 5%; --duration: 18s; --delay: 0s; }
 .particle:nth-child(2) { width: 18px; height: 18px; top: 25%; left: 85%; --duration: 22s; --delay: 2s; }
@@ -158,16 +155,9 @@ body {
 .particle:nth-child(10) { width: 12px; height: 12px; top: 80%; left: 70%; --duration: 17s; --delay: 3.5s; }
 
 @keyframes particleFloat {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.15;
-    }
-    100% {
-        transform: translate(var(--tx), var(--ty)) scale(1.6);
-        opacity: 0.5;
-    }
+  0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1.6); opacity: 0.3; }
 }
-
 
 .particle:nth-child(1) { --tx: 50px; --ty: -40px; }
 .particle:nth-child(2) { --tx: -45px; --ty: 35px; }
@@ -180,96 +170,61 @@ body {
 .particle:nth-child(9) { --tx: 30px; --ty: -45px; }
 .particle:nth-child(10) { --tx: -40px; --ty: 30px; }
 
-
 #profile-username {
-    font-weight: 700;
-    font-size: 22px;
-    color: #ffffff;
-    display: inline-block;
-    position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    animation: pulseSync 4s ease-in-out infinite;
+  font-weight: 700;
+  font-size: 22px;
+  color: #ffffff;
+  display: inline-block;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  animation: pulseSync 4s ease-in-out infinite;
 }
 
-
 #profile-username::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #8b7cf7, transparent);
-    animation: lineSync 4s ease-in-out infinite;
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  animation: lineSync 4s ease-in-out infinite;
 }
 
 @keyframes pulseSync {
-    0% {
-        color: #ffffff;
-        text-shadow: 0 0 0 rgba(139, 124, 247, 0);
-        transform: scale(1);
-    }
-    50% {
-        color: #c4b5fd;
-        text-shadow: 0 0 30px rgba(139, 124, 247, 0.08);
-        transform: scale(1.01);
-    }
-    100% {
-        color: #ffffff;
-        text-shadow: 0 0 0 rgba(139, 124, 247, 0);
-        transform: scale(1);
-    }
+  0% { color: #ffffff; text-shadow: 0 0 0 rgba(255, 255, 255, 0); transform: scale(1); }
+  50% { color: #cccccc; text-shadow: 0 0 30px rgba(255, 255, 255, 0.05); transform: scale(1.01); }
+  100% { color: #ffffff; text-shadow: 0 0 0 rgba(255, 255, 255, 0); transform: scale(1); }
 }
 
 @keyframes lineSync {
-    0% {
-        opacity: 0.15;
-        transform: scaleX(0.7);
-    }
-    50% {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-    100% {
-        opacity: 0.15;
-        transform: scaleX(0.7);
-    }
+  0% { opacity: 0.15; transform: scaleX(0.7); }
+  50% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0.15; transform: scaleX(0.7); }
 }
 
-
 .profile-post-card {
-    position: relative;
-    animation: cardFloatSync 4s ease-in-out infinite;
-    transition: all 0.3s ease;
+  position: relative;
+  animation: cardFloatSync 4s ease-in-out infinite;
+  transition: all 0.3s ease;
 }
 
 @keyframes cardFloatSync {
-    0% {
-        transform: translateY(0px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-    50% {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(139, 124, 247, 0.03);
-    }
-    100% {
-        transform: translateY(0px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
+  0% { transform: translateY(0px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+  50% { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.02); }
+  100% { transform: translateY(0px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
 }
-
 
 .profile-post-card::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #8b7cf7, transparent);
-    animation: lineSync 4s ease-in-out infinite;
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  animation: lineSync 4s ease-in-out infinite;
 }
-
 
 .profile-post-card:nth-child(1) { animation-delay: 0s; }
 .profile-post-card:nth-child(2) { animation-delay: 0.4s; }
@@ -277,235 +232,221 @@ body {
 .profile-post-card:nth-child(4) { animation-delay: 1.2s; }
 .profile-post-card:nth-child(5) { animation-delay: 1.6s; }
 
-
-
 .delete-post-btn {
-    background: none !important;
-    border: none;
-    cursor: pointer;
-    padding: 2px 4px;
-    border-radius: 6px;
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: none !important;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-post-btn svg {
-    stroke: #5a5a72;
-    transition: all 0.25s ease;
-    width: 16px;
-    height: 16px;
+  stroke: #555;
+  transition: all 0.25s ease;
+  width: 16px;
+  height: 16px;
 }
 
 .delete-post-btn:hover svg {
-    stroke: #ef4444;
-    transform: scale(1.1);
+  stroke: #ffffff;
+  transform: scale(1.1);
 }
 
-
 .confirm-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .confirm-overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .confirm-box {
-    background: #12121a;
-    border: 1px solid #1a1a24;
-    border-radius: 20px;
-    padding: 24px 20px 20px;
-    max-width: 320px;
-    width: 90%;
-    text-align: center;
-    transform: scale(0.9);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: 24px 20px 20px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .confirm-overlay.active .confirm-box {
-    transform: scale(1);
-    opacity: 1;
+  transform: scale(1);
+  opacity: 1;
 }
 
 .confirm-icon svg {
-    stroke: #ef4444;
-    width: 40px;
-    height: 40px;
+  stroke: #ffffff;
+  width: 40px;
+  height: 40px;
 }
 
 .confirm-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-top: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 4px;
 }
 
 .confirm-message {
-    font-size: 14px;
-    color: #8a8aa0;
-    margin: 8px 0 16px;
+  font-size: 14px;
+  color: #777;
+  margin: 8px 0 16px;
 }
 
 .confirm-actions {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .confirm-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .confirm-cancel {
-    background: #1a1a24;
-    color: #8a8aa0;
+  background: #1a1a1a;
+  color: #777;
 }
 
 .confirm-cancel:hover {
-    background: #242436;
-    color: #ffffff;
+  background: #222;
+  color: #ffffff;
 }
 
 .confirm-ok {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    color: #ffffff;
+  background: #ffffff;
+  color: #0a0a0a;
 }
 
 .confirm-ok:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
 
 .confirm-overlay .confirm-box {
-    animation: confirmPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: confirmPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes confirmPop {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .profile-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    max-width: 300px;
-    margin: 24px auto 16px;
-    padding: 12px 20px;
-    background: rgba(18, 18, 26, 0.3);
-    border-radius: 16px;
-    border: 1px solid rgba(26, 26, 36, 0.2);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 300px;
+  margin: 24px auto 16px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-name {
-    font-size: 20px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-    text-align: center;
-    letter-spacing: -0.3px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.3px;
 }
 
 .profile-stats {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .stat-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  position: relative;
 }
 
 .stat-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: -10px;
-    top: 15%;
-    height: 70%;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(139, 124, 247, 0.08), transparent);
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .stat-number {
-    font-weight: 600;
-    font-size: 13px;
-    color: #b8b8d0;
-    font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  color: #cccccc;
 }
 
-.stat-number.purple { color: #8b7cf7; }
-.stat-number.gold { color: #f59e0b; }
-.stat-number.green { color: #34d399; }
+.stat-number.purple { color: #ffffff; }
+.stat-number.gold { color: #ffffff; }
+.stat-number.green { color: #ffffff; }
 
 .stat-label {
-    color: #7a7a92;
-    font-size: 10px;
-    text-transform: lowercase;
-    font-family: inherit;
-    letter-spacing: 0.3px;
+  color: #555;
+  font-size: 10px;
+  text-transform: lowercase;
+  letter-spacing: 0.3px;
 }
 
-
 @media (max-width: 480px) {
-    .profile-header {
-        max-width: 260px;
-        padding: 10px 16px;
-        margin: 16px auto 12px;
-    }
+  .profile-header {
+    max-width: 260px;
+    padding: 10px 16px;
+    margin: 16px auto 12px;
+  }
 
-    .profile-name {
-        font-size: 18px;
-    }
+  .profile-name {
+    font-size: 18px;
+  }
 
-    .profile-stats {
-        gap: 14px;
-    }
+  .profile-stats {
+    gap: 14px;
+  }
 
-    .stat-number {
-        font-size: 12px;
-    }
+  .stat-number {
+    font-size: 12px;
+  }
 
-    .stat-item:not(:last-child)::after {
-        right: -7px;
-    }
+  .stat-item:not(:last-child)::after {
+    right: -7px;
+  }
 
-    .stat-label {
-        font-size: 9px;
-    }
+  .stat-label {
+    font-size: 9px;
+  }
 }

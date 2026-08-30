@@ -30,7 +30,7 @@ header {
   right: 0;
   background: rgba(11, 11, 14, 0.7);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(139, 124, 247, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   z-index: 100;
   padding: 14px 0;
 }
@@ -46,7 +46,7 @@ header {
 .logo {
   font-size: 26px;
   font-weight: 800;
-  color: #8b7cf7;
+  color: #ffffff;
   letter-spacing: -0.5px;
   flex-shrink: 0;
 }
@@ -70,7 +70,7 @@ nav a:hover {
 }
 
 .btn-outline {
-  border: 1px solid rgba(139, 124, 247, 0.2);
+  border: 1px solid rgba(95, 95, 112, 0.2);
   padding: 8px 20px;
   border-radius: 30px;
   color: #d4d4e0 !important;
@@ -79,13 +79,13 @@ nav a:hover {
 }
 
 .btn-outline:hover {
-  border-color: #8b7cf7;
-  color: #8b7cf7 !important;
+  border-color: #f6f3f3;
+  color: #fbfbfc !important;
 }
 
 .btn-primary {
-  background: #8b7cf7;
-  color: #fff;
+  background: #f9f7f7;
+  color: #000000;
   padding: 8px 24px;
   border-radius: 30px;
   font-weight: 600;
@@ -94,9 +94,9 @@ nav a:hover {
 }
 
 .btn-primary:hover {
-  background: #6d5bd0;
+  background: #f6f6f7;
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 8px 30px rgba(139, 124, 247, 0.35);
+  box-shadow: 0 8px 30px rgba(254, 254, 254, 0.35);
 }
 
 
@@ -122,7 +122,7 @@ nav a:hover {
 }
 
 .hero-text h1 span {
-  background: linear-gradient(135deg, #8b7cf7, #a78bfa, #c4b5fd);
+  background: linear-gradient(135deg, #ffffff, #ffffff, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -253,12 +253,12 @@ nav a:hover {
 
 .feature-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(139, 124, 247, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 60px rgba(139, 124, 247, 0.04);
 }
 
 .feature-icon svg {
-  stroke: #8b7cf7;
+  stroke: #fbfbfb;
 }
 
 .feature-card h3 {
@@ -283,7 +283,7 @@ nav a:hover {
 .boost h2 {
   font-size: 36px;
   font-weight: 700;
-  background: linear-gradient(135deg, #f59e0b, #f97316);
+  background: linear-gradient(135deg, #ffffff, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 12px;
@@ -314,8 +314,8 @@ nav a:hover {
 
 .boost-plan:hover {
   transform: translateY(-6px);
-  border-color: #f59e0b;
-  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.06);
+  border-color: #fbfbfa;
+  box-shadow: 0 12px 40px rgba(251, 250, 250, 0.06);
 }
 
 .boost-plan-header {
@@ -389,7 +389,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #8b7cf7;
+  color: #ffffff;
 }
 
 
@@ -474,4 +474,3 @@ footer a:hover {
   display: inline-block;
   position: relative;
 }
-
