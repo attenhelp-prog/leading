@@ -177,7 +177,25 @@
     <div class="particle"></div>
     <div class="particle"></div>
 </div>
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
+ <script src="test.js"></script>
 </body>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBWrBWv5I9daQ97E10_uZB70jfou_h1CDQ",
+        authDomain: "attention-social.firebaseapp.com",
+        projectId: "attention-social",
+        storageBucket: "attention-social.firebasestorage.app",
+        messagingSenderId: "811858803917",
+        appId: "1:811858803917:web:5caa2486e694737e797d84"
+    };
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+    window.auth = firebase.auth();
+    console.log('✅ Firebase инициализирован');
+</script>
 </html>
 
