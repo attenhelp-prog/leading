@@ -43,6 +43,29 @@ async function saveSubscription() {
 }
 
 // ===== ЗАГРУЗКА ПОСТОВ ИЗ FIRESTORE =====
+// async function loadData() {
+//     try {
+//         const snapshot = await window.db.collection('posts')
+//             .orderBy('createdAt', 'desc')
+//             .get();
+        
+//         posts = snapshot.docs.map(doc => ({
+//             id: doc.id,
+//             ...doc.data(),
+//             hasLiked: false,
+//             hasDisliked: false,
+//             likedBy: doc.data().likedBy || [],
+//             viewedBy: doc.data().viewedBy || []
+//         }));
+        
+//         renderFeedWithAnimation();
+//     } catch (error) {
+//         console.error('Ошибка загрузки постов:', error);
+//     }
+// }
+
+
+
 async function loadData() {
     try {
         const snapshot = await window.db.collection('posts')
@@ -58,11 +81,26 @@ async function loadData() {
             viewedBy: doc.data().viewedBy || []
         }));
         
+        // 🔥 ШАГ 1: Сразу после загрузки проверяем и жестко удаляем просроченные посты
+        await removeExpiredPosts();
+        
+        // Отображаем то, что осталось
         renderFeedWithAnimation();
     } catch (error) {
         console.error('Ошибка загрузки постов:', error);
     }
 }
+
+// ===== АВТОМАТИЧЕСКАЯ ПРОВЕРКА ПО ТАЙМЕРУ =====
+// 🔥 ШАГ 2: Запускаем проверку каждые 30 секунд, чтобы посты исчезали прямо на глазах у пользователя
+setInterval(() => {
+    if (posts.length > 0) {
+        removeExpiredPosts();
+    }
+}, 30 * 1000); 
+
+
+
 
 // ===== СОХРАНЕНИЕ ПОСТА В FIRESTORE =====
 async function savePostToFirestore(post) {
@@ -115,16 +153,46 @@ function getRemainingTime(post) {
 }
 
 // ===== УДАЛЕНИЕ ПРОСРОЧЕННЫХ ПОСТОВ =====
+// async function removeExpiredPosts() {
+//     const now = Date.now();
+//     const expired = posts.filter(post => {
+//         const expiresAt = post.createdAt + (post.lifeTime * 60 * 60 * 1000);
+//         return expiresAt <= now;
+//     });
+    
+//     for (const post of expired) {
+//         await deletePostFromFirestore(post.id);
+//     }
+// }
+
+
+
 async function removeExpiredPosts() {
     const now = Date.now();
+    // Находим посты, у которых истекло время
     const expired = posts.filter(post => {
         const expiresAt = post.createdAt + (post.lifeTime * 60 * 60 * 1000);
         return expiresAt <= now;
     });
     
+    if (expired.length === 0) return; // Если удалять нечего, выходим
+
+    console.log(`🧹 Обнаружено просроченных постов для удаления: ${expired.length}`);
+    
+    // Удаляем каждый пост из Firestore и из локального массива
     for (const post of expired) {
-        await deletePostFromFirestore(post.id);
+        try {
+            // 1. Удаляем с сервера Firestore
+            await window.db.collection('posts').doc(post.id).delete();
+            // 2. Удаляем из локального массива в памяти
+            posts = posts.filter(p => p.id !== post.id);
+        } catch (error) {
+            console.error(`Ошибка при удалении поста ${post.id} с сервера:`, error);
+        }
     }
+    
+    // Перерисовываем ленту уже БЕЗ удаленных постов
+    renderFeedWithAnimation();
 }
 
 // ===== ОТРИСОВКА С АНИМАЦИЕЙ =====
