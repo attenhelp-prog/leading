@@ -195,7 +195,20 @@
     firebase.initializeApp(firebaseConfig);
     window.db = firebase.firestore();
     window.auth = firebase.auth();
-    console.log('✅ Firebase инициализирован');
+    console.log(' Firebase инициализирован');
 </script>
+
+<!-- Настройки PWA приложения -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(function() { console.log(' Attention PWA успешно готово к работе!'); })
+      .catch(function(err) { console.error(' Ошибка инициализации PWA:', err); });
+  }
+</script>
+
 </html>
 

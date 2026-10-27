@@ -82,4 +82,17 @@
     window.db = firebase.firestore();
     window.auth = firebase.auth();
 </script>
+
+<!-- Настройки PWA приложения из корня -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#000000">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function() { console.log(' Attention PWA в профиле готово!'); })
+      .catch(function(err) { console.error(' Ошибка PWA в профиле:', err); });
+  }
+</script>
+
 </html>
