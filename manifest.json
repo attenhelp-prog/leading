@@ -1,8 +1,10 @@
 {
   "name": "Attention Social Network",
   "short_name": "Attention",
-  "description": "Социальная сеть со временем жизни публикаций ",
-  "start_url": "./feed.html",
+  "description": "Социальная сеть со временем жизни публикаций",
+  "id": "/leading/",
+  "scope": "/leading/",
+  "start_url": "/leading/feed.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
@@ -20,3 +22,4 @@
     }
   ]
 }
+
