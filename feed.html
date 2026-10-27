@@ -200,23 +200,5 @@
     console.log(' Firebase инициализирован');
 </script>
 
-
-
-<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Attention%20Social%20Network%22%2C%22short_name%22%3A%22Attention%22%2C%22start_url%22%3A%22feed.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%23000000%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22logo192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image/png%22%7D%2C%7B%22src%22%3A%22logo512.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/png%22%7D%5D%7D">
-
-<!-- Правильное подключение манифеста для подпапки гитхаба -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    // Добавляем ?v=4 для принудительного сброса застрявшего кэша
-    navigator.serviceWorker.register('sw.js?v=4')
-      .then(function() { console.log('🚀 Attention PWA успешно готово!'); })
-      .catch(function(err) { console.error('❌ Ошибка PWA:', err); });
-  }
-</script>
-
-
 </html>
 

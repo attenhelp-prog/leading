@@ -267,22 +267,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- Настройки PWA приложения -->
-<link rel="manifest" href="manifest.json">
-
-
-<!-- Правильное подключение манифеста для подпапки гитхаба -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    // Добавляем ?v=4 для принудительного сброса застрявшего кэша
-    navigator.serviceWorker.register('sw.js?v=4')
-      .then(function() { console.log('🚀 Attention PWA успешно готово!'); })
-      .catch(function(err) { console.error('❌ Ошибка PWA:', err); });
-  }
-</script>
-
-
 </html>
