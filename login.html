@@ -63,12 +63,18 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#000000">
 
+<!-- Правильное подключение манифеста для подпапки гитхаба -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=2')
-      .then(function() { console.log(' Attention PWA успешно готово к работе!'); })
-      .catch(function(err) { console.error(' Ошибка инициализации PWA:', err); });
+    // Добавляем ?v=4 для принудительного сброса застрявшего кэша
+    navigator.serviceWorker.register('sw.js?v=4')
+      .then(function() { console.log('🚀 Attention PWA успешно готово!'); })
+      .catch(function(err) { console.error('❌ Ошибка PWA:', err); });
   }
 </script>
+
 
 </html>
