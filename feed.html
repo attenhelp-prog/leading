@@ -222,7 +222,7 @@
 
 <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('sw.js?v=2')
       .then(function() { console.log(' Attention PWA успешно готово к работе!'); })
       .catch(function(err) { console.error(' Ошибка инициализации PWA:', err); });
   }
