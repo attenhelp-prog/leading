@@ -1,4 +1,50 @@
 // ============================================
+//   ЖЕСТКАЯ ПРОВЕРКА КЭША АВТОРИЗАЦИИ И РЕДИРЕКТ
+// ============================================
+(function() {
+    // 1. Быстрая проверка: если в LocalStorage вообще нет ключей Firebase, 
+    // значит пользователь точно не входил — останавливаем скрипт и не редиректим гостя.
+    let hasFirebaseCache = false;
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).includes("firebase:authUser")) {
+            hasFirebaseCache = true;
+            break;
+        }
+    }
+
+    // 2. Если кэш в браузере найден, запускаем слушатель Firebase Auth
+    if (hasFirebaseCache && window.firebase && window.firebase.auth) {
+        window.firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log("Пользователь успешно восстановлен из кэша:", user.email);
+                
+                // Проверяем текущую страницу
+                const path = window.location.pathname;
+                
+                // Если мы залогинены, но находимся на index, login или register — прыгаем в ленту
+                if (path.endsWith("index.html") || 
+                    path.endsWith("login.html") || 
+                    path.endsWith("register.html") || 
+                    path === "/leading/" || 
+                    path.endsWith("/leading")) {
+                    
+                    window.location.href = "/leading/feed.html";
+                }
+            }
+        });
+    } else {
+        console.log("Локальный кэш Firebase пуст. Пользователь не входил в систему.");
+    }
+})();
+
+
+
+
+
+
+
+
+// ============================================
 //   ATTENTION — ОСНОВНАЯ ЛОГИКА (FIREBASE)
 // ============================================
 
@@ -7,51 +53,6 @@ let posts = [];
 let currentUser = "user";
 let subscribedAuthors = [];
 let currentReplyTo = null;
-
-
-
-
-
-// ============================================
-//   ПРОВЕРКА АВТОРИЗАЦИИ И ПЕРЕХОД В ЛЕНТУ
-// ============================================
-if (window.firebase && window.firebase.auth) {
-    window.firebase.auth().onAuthStateChanged((user) => {
-        // Проверяем, где сейчас находится пользователь
-        const currentPath = window.location.pathname;
-
-        if (user) {
-            console.log("Пользователь авторизован (найден в кэше):", user.email);
-            // Сохраняем ID пользователя на всякий случай для других страниц
-            localStorage.setItem('userUid', user.uid);
-
-            // Если пользователь авторизован, но зашел на стартовые страницы,
-            // мгновенно перебрасываем его в рабочую ленту feed.html
-            if (currentPath.endsWith("index.html") || 
-                currentPath.endsWith("login.html") || 
-                currentPath.endsWith("register.html") || 
-                currentPath === "/leading/" || 
-                currentPath.endsWith("/leading")) {
-                
-                window.location.href = "/leading/feed.html";
-            }
-        } else {
-            console.log("Кэш пуст, пользователь не авторизован.");
-            // Если сессии нет, а пользователь пытается зайти в ленту напрямую
-            if (currentPath.endsWith("feed.html")) {
-                window.location.href = "/leading/login.html";
-            }
-        }
-    });
-}
-
-
-
-
-
-
-
-
 
 
 // ===== ПОДПИСКИ (FIRESTORE) =====
