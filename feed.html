@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>attention</title>
+    <!-- Убираем слэш перед названием файла, чтобы путь стал относительным -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fafafa">
+
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            // Регистрируем сервис-воркер с явным указанием пути и области видимости
+            navigator.serviceWorker.register('/leading/sw.js', { scope: '/leading/' })
+                .then(reg => console.log('PWA Service Worker успешно запущен!'))
+                .catch(err => console.log('Ошибка PWA:', err));
+        });
+    }
+</script>
 </head>
 <body> 
     <link rel="stylesheet" href="style.css">
@@ -179,21 +194,6 @@
 </div>
 <!-- <script src="script.js"></script> -->
  <script src="test.js"></script>
-
-<<!-- Явно указываем полный путь от корня домена GitHub Pages -->
-<link rel="manifest" href="/leading/manifest.json">
-<meta name="theme-color" content="#fafafa">
-
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            // Регистрируем сервис-воркер с явным указанием пути и области видимости
-            navigator.serviceWorker.register('/leading/sw.js', { scope: '/leading/' })
-                .then(reg => console.log('PWA Service Worker успешно запущен!'))
-                .catch(err => console.log('Ошибка PWA:', err));
-        });
-    }
-</script>
 
 
 </body>
