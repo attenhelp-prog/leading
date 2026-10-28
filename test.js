@@ -634,6 +634,19 @@ document.addEventListener('DOMContentLoaded', function() {
 window.createPost = createPost;
 
 
+// Этот скрипт мгновенно проверяет, залогинен ли человек, и перекидывает в ленту
+if (window.firebase && window.firebase.auth) {
+    window.firebase.auth().onAuthStateChanged((user) => {
+        // Если Firebase нашел в кэше браузера авторизованного пользователя
+        if (user) {
+            // Мгновенно отправляем его в ленту
+            window.location.href = "/leading/feed.html";
+        }
+    });
+}
+
+
+
 
 
 
