@@ -648,3 +648,17 @@ window.createPost = createPost;
 
 
 
+import { getAuth, onAuthStateChanged } from "https://gstatic.com";
+
+const auth = getAuth();
+
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        // Пользователь НЕ авторизован (или вышел). Защищаем страницу.
+        // Выкидываем его на страницу входа
+        window.location.href = "/leading/login.html";
+    } else {
+        console.log("Доступ разрешен для:", user.email);
+        // Здесь вызывайте ваши функции загрузки постов, подписок и т.д.
+    }
+});
