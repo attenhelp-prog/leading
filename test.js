@@ -8,6 +8,48 @@ let currentUser = "user";
 let subscribedAuthors = [];
 let currentReplyTo = null;
 
+
+
+
+
+// ===== АВТО-ПЕРЕХОД В ЛЕНТУ (ПРОВЕРКА КЭША БРАУЗЕРА) =====
+// Скрипт проверяет, авторизован ли пользователь, и управляет страницами
+if (window.firebase && window.firebase.auth) {
+    window.firebase.auth().onAuthStateChanged((user) => {
+        const currentPath = window.location.pathname;
+
+        if (user) {
+            console.log("Пользователь авторизован (сессия из кэша):", user.email);
+            
+            // Если ключ в кэше есть, но мы застряли на страницах регистрации/входа или в корне репозитория
+            if (currentPath.endsWith("index.html") || 
+                currentPath.endsWith("login.html") || 
+                currentPath.endsWith("register.html") || 
+                currentPath === "/leading/") {
+                
+                // Мгновенно перебрасываем в ленту
+                window.location.href = "/leading/feed.html";
+            }
+        } else {
+            console.log("Кэш пуст, пользователь не авторизован.");
+            
+            // Если кэша нет, а кто-то пытается открыть ленту напрямую по ссылке
+            if (currentPath.endsWith("feed.html")) {
+                // Выкидываем на страницу входа
+                window.location.href = "/leading/login.html";
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
 // ===== ПОДПИСКИ (FIRESTORE) =====
 async function loadSubscriptions() {
     try {
@@ -632,8 +674,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 window.createPost = createPost;
-
-
 
 
 
