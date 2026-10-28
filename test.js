@@ -1,27 +1,32 @@
 // ============================================
-//   ЖЕСТКАЯ ПРОВЕРКА КЭША АВТОРИЗАЦИИ И РЕДИРЕКТ
+//   БЕЗОПАСНАЯ ПРОВЕРКА КЭША С ОЖИДАНИЕМ FIREBASE
 // ============================================
 (function() {
-    // 1. Быстрая проверка: если в LocalStorage вообще нет ключей Firebase, 
-    // значит пользователь точно не входил — останавливаем скрипт и не редиректим гостя.
+    // 1. Быстрая проверка: если в LocalStorage вообще нет упоминаний авторизации Firebase,
+    // значит пользователь точно не входил — сразу выходим, чтобы не тратить ресурсы.
     let hasFirebaseCache = false;
     for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).includes("firebase:authUser")) {
+        const key = localStorage.key(i);
+        if (key && key.includes("firebase:authUser")) {
             hasFirebaseCache = true;
             break;
         }
     }
 
-    // 2. Если кэш в браузере найден, запускаем слушатель Firebase Auth
-    if (hasFirebaseCache && window.firebase && window.firebase.auth) {
+    if (!hasFirebaseCache) {
+        console.log("Кэш авторизации пуст, пользователь гость.");
+        return; 
+    }
+
+    // 2. Функция, которая выполнит редирект, как только Firebase Auth подтвердит токен
+    function checkAuthAndRedirect() {
         window.firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 console.log("Пользователь успешно восстановлен из кэша:", user.email);
                 
-                // Проверяем текущую страницу
                 const path = window.location.pathname;
                 
-                // Если мы залогинены, но находимся на index, login или register — прыгаем в ленту
+                // Проверяем, что мы находимся именно на стартовых страницах
                 if (path.endsWith("index.html") || 
                     path.endsWith("login.html") || 
                     path.endsWith("register.html") || 
@@ -32,10 +37,21 @@
                 }
             }
         });
-    } else {
-        console.log("Локальный кэш Firebase пуст. Пользователь не входил в систему.");
     }
+
+    // 3. Интервальный таймер: ждем появления Firebase в объекте window
+    const authInterval = setInterval(() => {
+        if (window.firebase && window.firebase.auth) {
+            clearInterval(authInterval); // Как только Firebase загрузился, останавливаем таймер
+            checkAuthAndRedirect();     // Запускаем проверку сессии
+        }
+    }, 50); // Проверяем каждые 50 миллисекунд (незаметно для глаза)
 })();
+
+
+
+
+
 
 
 
