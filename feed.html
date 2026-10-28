@@ -180,6 +180,20 @@
 <!-- <script src="script.js"></script> -->
  <script src="test.js"></script>
 
+<!-- Подключаем манифест PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fafafa">
+
+<!-- Скрипт регистрации сервис-воркера с указанием правильной области видимости -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js', { scope: '/leading/' })
+                .then(reg => console.log('PWA успешно активирован на GitHub Pages!', reg))
+                .catch(err => console.log('Ошибка активации PWA:', err));
+        });
+    }
+</script>
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
