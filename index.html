@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Attention</title>
   <link rel="stylesheet" href="leading.css" />
+
+
+  <script> 
+    // Этот скрипт мгновенно проверяет, залогинен ли человек, и перекидывает в ленту
+if (window.firebase && window.firebase.auth) {
+    window.firebase.auth().onAuthStateChanged((user) => {
+        // Если Firebase нашел в кэше браузера авторизованного пользователя
+        if (user) {
+            // Мгновенно отправляем его в ленту
+            window.location.href = "/leading/feed.html";
+        }
+    });
+}
+
+  </script>
+
 </head>
 <body>
 

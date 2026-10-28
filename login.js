@@ -71,18 +71,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-import { getAuth, onAuthStateChanged } from "https://gstatic.com";
-
-const auth = getAuth();
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // Пользователь УЖЕ вошел в систему. Ему НЕЛЬЗЯ находиться на страницах реги/логина.
-        // Перенаправляем его строго в ленту с учетом подпапки GitHub Pages
-        window.location.href = "/leading/feed.html";
-    } else {
-        // Пользователь гость. Ничего не делаем, он может спокойно регистрироваться или логиниться
-        console.log("Пользователь не авторизован, доступ открыт.");
-    }
-});
