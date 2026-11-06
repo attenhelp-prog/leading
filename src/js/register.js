@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'feed.html';
         } catch (error) {
             console.error('Ошибка регистрации:', error);
-            alert('❌ Ошибка: ' + error.message);
+            alert(' Ошибка: ' + error.message);
             this.textContent = 'Зарегистрироваться';
             this.disabled = false;
         }

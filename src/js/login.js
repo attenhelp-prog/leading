@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Ошибка входа:', error);
             showError(email);
             showError(password);
-            alert('❌ Неверный email или пароль');
+            alert(' Неверный email или пароль');
             this.textContent = 'Войти';
             this.disabled = false;
         }

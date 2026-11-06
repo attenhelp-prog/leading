@@ -166,7 +166,7 @@ document.addEventListener('click', function(e) {
 
     const overlay = document.getElementById('confirmOverlayProfile');
     if (overlay) {
-        // 🔥 Пробиваем любые блокировки в CSS через !important
+        //  Пробиваем любые блокировки в CSS через !important
         overlay.style.setProperty('display', 'flex', 'important');
         overlay.style.setProperty('opacity', '1', 'important');
         overlay.style.setProperty('visibility', 'visible', 'important');
@@ -180,13 +180,13 @@ document.getElementById('confirmOkProfile')?.addEventListener('click', function(
 
     window.db.collection('posts').doc(String(postIdToDelete)).delete()
         .then(() => {
-            console.log('✅ Пост успешно удален с сервера:', postIdToDelete);
+            console.log(' Пост успешно удален с сервера:', postIdToDelete);
             posts = posts.filter(p => p.id !== postIdToDelete);
             renderProfilePosts(); 
             closeConfirmModal();
         })
         .catch(err => {
-            console.error('❌ Ошибка удаления:', err);
+            console.error(' Ошибка удаления:', err);
             closeConfirmModal();
         });
 });
