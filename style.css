@@ -125,11 +125,11 @@ body {
 }
 
 .post-card {
-  background: #0d0d0d;
+  background: #0a0a0a;
   border-radius: 16px;
   margin-bottom: 12px;
   padding: 4px 0 2px;
-  border: 1px solid #181818;
+  /* border: 1px solid #bb1c1c; */
 }
 
 .info {
@@ -152,7 +152,7 @@ body {
 }
 
 .time {
-  color: #555;
+  color: #b6b6b6;
   font-size: 12px;
   display: inline-flex;
   align-items: center;
@@ -208,7 +208,7 @@ body {
 
 .views {
   margin-left: auto;
-  color: #555;
+  color: #c5c5c5;
   font-size: 12px;
   display: inline-flex;
   align-items: center;
@@ -226,7 +226,7 @@ body {
 
 .post-image {
   margin: 10px 16px 8px;
-  background: #0a0a0a;
+  background: #000000;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
@@ -246,7 +246,7 @@ body {
 .reply-btn {
   background: none;
   border: none;
-  color: #555;
+  color: #aaaaaa;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
