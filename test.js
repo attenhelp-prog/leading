@@ -22,7 +22,7 @@ async function loadSubscriptions() {
             subscribedAuthors = [];
             await window.db.collection('subscriptions').doc(userUid).set({ authors: [] });
         }
-        console.log('📚 Подписки загружены:', subscribedAuthors);
+        console.log(' Подписки загружены:', subscribedAuthors);
     } catch (error) {
         console.error('Ошибка загрузки подписок:', error);
         subscribedAuthors = [];
@@ -37,7 +37,7 @@ async function saveSubscription() {
         await window.db.collection('subscriptions').doc(userUid).set({
             authors: subscribedAuthors
         });
-        console.log('💾 Подписки сохранены:', subscribedAuthors);
+        console.log(' Подписки сохранены:', subscribedAuthors);
     } catch (error) {
         console.error('Ошибка сохранения подписок:', error);
     }
@@ -82,7 +82,7 @@ async function loadData() {
             viewedBy: doc.data().viewedBy || []
         }));
         
-        // 🔥 ШАГ 1: Сразу после загрузки проверяем и жестко удаляем просроченные посты
+        //   Сразу после загрузки проверяем и жестко удаляем просроченные посты
         await removeExpiredPosts();
         
         // Отображаем то, что осталось
@@ -93,7 +93,7 @@ async function loadData() {
 }
 
 // ===== АВТОМАТИЧЕСКАЯ ПРОВЕРКА ПО ТАЙМЕРУ =====
-// 🔥 ШАГ 2: Запускаем проверку каждые 30 секунд, чтобы посты исчезали прямо на глазах у пользователя
+//  Запускаем проверку каждые 30 секунд, чтобы посты исчезали прямо на глазах у пользователя
 setInterval(() => {
     if (posts.length > 0) {
         removeExpiredPosts();
